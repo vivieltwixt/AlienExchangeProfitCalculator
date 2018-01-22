@@ -2,20 +2,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+
 public class processInput {
     private int numDataSets;
     private int numDenominations;
     private int numPrices;
     private int[] exchangeRates;
 
-    private int lowestPrice;
-    private int highestPrice;
+    private int lowestPrice = Integer.MAX_VALUE;
+    private int highestPrice = Integer.MIN_VALUE;
     private int profit;
 
     private String filename = "input_1.txt";
 
     void initialProcessing() {
-        File inputFile = new File("\\src\\resources\\" + filename);
+        File inputFile = new File("resources\\" + filename);
         Scanner sc = null;
 
         try {
@@ -29,6 +30,7 @@ public class processInput {
         numDataSets = sc.nextInt();
         numDenominations = sc.nextInt();
         numPrices = sc.nextInt();
+        sc.nextLine(); // consume rest of line
 
         exchangeRates = new int[numDenominations];
         exchangeRates[numDenominations - 1] = 1; //TODO: Commenting
@@ -37,10 +39,22 @@ public class processInput {
         String[] ratesAsStrings = ratesString.split(" ");
         int[] ratesAsInts = stringArrayToIntArray(ratesAsStrings);
 
-        for (int i = 0; i < ratesAsInts.length - 1; i++) {
+        for (int i = 0; i < ratesAsInts.length; i++) {
             exchangeRates[i] = productOfArrayValues(i, ratesAsInts);
         }
 
+        //DEBUG
+        for(int i=0; i< ratesAsInts.length; i++) {
+            System.out.println(ratesAsInts[i]);
+        }
+        System.out.println("numDataSets: " + numDataSets);
+        System.out.println("numDenominations: " + numDenominations);
+        System.out.println("numPrices: " + numPrices);
+
+        for(int i=0; i<exchangeRates.length; i++){
+            System.out.print(exchangeRates[i] + " ");
+        }
+        System.out.println();
 
         for (int i = 0; i < numPrices; i++) {
             String priceLine = sc.nextLine();
@@ -49,12 +63,14 @@ public class processInput {
 
             determineBestPricing(price);
         }
+
+        System.out.println("The profit would be " + getBestProfitMargin());
     }
 
     private int productOfArrayValues(int index, int[] ratesAsInts) {
         int product = 1;
 
-        for (int i = index; i < ratesAsInts.length - 1; i++) {
+        for (int i = index; i < ratesAsInts.length; i++) {
             product *= ratesAsInts[i];
         }
 
@@ -74,7 +90,7 @@ public class processInput {
     void determineBestPricing(int[] price) {
         int totalCost = 0;
 
-        for (int i = 0; i < price.length - 1; i++) {
+        for (int i = 0; i < price.length; i++) {
             totalCost += price[i] * exchangeRates[i];
         }
 
