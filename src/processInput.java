@@ -3,8 +3,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 
+
 public class processInput {
-    private int numDataSets;
+ /*   private int numDataSets;
     private int numDenominations;
     private int numPrices;
     private int[] exchangeRates;
@@ -87,7 +88,7 @@ public class processInput {
         return intArray;
     }
 
-    void determineBestPricing(int[] price) {
+    void determineBestPricings(int[] price) {
         int totalCost = 0;
 
         for (int i = 0; i < price.length; i++) {
@@ -103,5 +104,5 @@ public class processInput {
     int getBestProfitMargin() {
         return highestPrice - lowestPrice;
     }
-
+*/
 }
