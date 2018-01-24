@@ -25,7 +25,7 @@
           <focusCycleRoot value="true"/>
           <focusable value="false"/>
           <font size="12"/>
-          <text value="Input the merchandise data to help Tim determine his potential profit margins."/>
+          <text value="Input merchandise data to help Tim determine his potential profit margins."/>
         </properties>
       </component>
       <vspacer id="d14cc">
@@ -42,15 +42,6 @@
           </grid>
         </constraints>
       </vspacer>
-      <component id="188b9" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
-        <constraints>
-          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="2" indent="1" use-parent-layout="false">
-            <minimum-size width="300" height="100"/>
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <vspacer id="195b1">
         <constraints>
           <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
@@ -124,6 +115,21 @@
           </component>
         </children>
       </grid>
+      <scrollpane id="144a1">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="2" indent="0" use-parent-layout="false">
+            <minimum-size width="300" height="100"/>
+          </grid>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="188b9" class="javax.swing.JTextArea" binding="outputDisplay">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

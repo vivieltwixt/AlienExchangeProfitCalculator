@@ -12,7 +12,7 @@ public class AlienExchangeProfitModel {
     // TODO: Catch errors in formatting of file
     // TODO: Commenting
 
-    AlienExchangeProfitModel() {
+    public AlienExchangeProfitModel() {
         resetModel(); //initializing model
     }
 
@@ -32,13 +32,11 @@ public class AlienExchangeProfitModel {
         }
 
         numDataSets = sc.nextInt();
-        int numDenominations = sc.nextInt();
-        int numPrices = sc.nextInt();
-        sc.nextLine(); // consume rest of line
 
         profits = new int[numDataSets];
         for (int i = 0; i < numDataSets; i++) {
-            DataSet itemData = new DataSet(sc, numDenominations, numPrices);
+            System.out.println("Working on data set: " + i);
+            DataSet itemData = new DataSet(sc);
             profits[i] = itemData.determineBestProfitMargin();
         }
     }

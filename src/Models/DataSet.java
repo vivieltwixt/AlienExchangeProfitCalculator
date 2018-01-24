@@ -7,16 +7,20 @@ public class DataSet {
 
     private int[] exchangeRates;
     private int numPrices;
+    private int numDenominations;
 
     private int lowestPrice;
     private int highestPrice;
 
 
-    DataSet(Scanner sc, int numDenominations, int numPrices) {
+    DataSet(Scanner sc) {
         dataSetScanner = sc;
 
+        numDenominations = sc.nextInt();
+        numPrices = sc.nextInt();
+        sc.nextLine(); // consume rest of line
+
         exchangeRates = new int[numDenominations];
-        this.numPrices = numPrices;
 
         lowestPrice = Integer.MAX_VALUE;
         highestPrice = Integer.MIN_VALUE;
@@ -42,14 +46,31 @@ public class DataSet {
         for (int i = 0; i < ratesAsInts.length; i++) {
             exchangeRates[i] = productOfArrayValues(i, ratesAsInts);
         }
+
+        //TODO: DEBUG
+        for(int i=0; i< ratesAsInts.length; i++) {
+            System.out.println(ratesAsInts[i]);
+        }
+
+       // System.out.println("numDenominations: " + numDenominations);
+        System.out.println("numPrices: " + numPrices);
+
+        for(int i=0; i<exchangeRates.length; i++){
+            System.out.print(exchangeRates[i] + " ");
+        }
+        System.out.println();
     }
 
     private void calculatePriceInSmallestDenomination() {
         String priceLine = dataSetScanner.nextLine();
+
         String[] priceAsStrings = priceLine.split(" ");
         int[] price = stringArrayToIntArray(priceAsStrings);
 
         int totalCost = 0;
+
+        System.out.println("Length of price " + price.length);
+        System.out.println("Length of exchange rates " + exchangeRates.length);
 
         for (int j = 0; j < price.length; j++) {
             totalCost += price[j] * exchangeRates[j];

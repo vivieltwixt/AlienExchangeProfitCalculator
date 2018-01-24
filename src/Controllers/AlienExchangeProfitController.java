@@ -1,26 +1,33 @@
 package Controllers;
 
+import Models.AlienExchangeProfitModel;
 import Views.AlienExchangeProfitView;
-
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.io.File;
 
-public class AlienExchangeProfitController {
-    public static void main(String[] args) {
-      try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+public class AlienExchangeProfitController implements java.awt.event.ActionListener {
+    AlienExchangeProfitModel model;
+    AlienExchangeProfitView view;
+
+    public AlienExchangeProfitController(){
+        view = new AlienExchangeProfitView(this);
+        model = new AlienExchangeProfitModel();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JFileChooser fc = new JFileChooser();
+            int returnVal = fc.showOpenDialog(view);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                model.updateModel(file);
+                view.updateView(model.getProfits());
+            } else {
+                return;
             }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
-        }
 
-        JFrame frame = new JFrame("AlienExchangeProfitCalculator");
-        frame.setContentPane(new AlienExchangeProfitView().panel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+
     }
 }
