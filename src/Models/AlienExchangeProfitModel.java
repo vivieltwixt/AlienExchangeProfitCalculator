@@ -9,11 +9,9 @@ import java.util.Scanner;
 * */
 public class AlienExchangeProfitModel {
     private int numDataSets;
-    private int[] profits; // stores the best possible profit for each data set Ex. [23, 17, 1] means 23 is the best
+    private int [] profits; // stores the best possible profit for each data set Ex. [23, 17, 1] means 23 is the best
     // possible profit within the 1st data set, 17 for the second data set, etc.
 
-    // TODO: Catch errors in formatting of file
-    // TODO: Commenting
 
     public AlienExchangeProfitModel() {
         resetModel(); //initializing model
@@ -31,7 +29,8 @@ public class AlienExchangeProfitModel {
         try {
             sc = new Scanner(inputFile);
         } catch (FileNotFoundException e) {
-            return; //TODO: alert for file not found
+            e.printStackTrace();
+            return;
         }
 
         try {
@@ -42,9 +41,9 @@ public class AlienExchangeProfitModel {
                 DataSet itemData = new DataSet(sc);
                 profits[i] = itemData.determineBestProfitMargin();
             }
-        } catch (java.util.NoSuchElementException | java.lang.IllegalArgumentException ex) {
+        } catch (java.util.NoSuchElementException | IllegalArgumentException e) {
             resetModel();
-            //TODO: alert for incorrect format
+            e.printStackTrace();
             return;
         }
     }

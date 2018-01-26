@@ -31,8 +31,11 @@ public class AlienExchangeProfitView extends JFrame {
                 text += "Data Set " + i + ":\n";
                 text += profits[i] + "\n\n";
             }
+
+            outputDisplay.setText(text);
+        } else {
+            outputDisplay.setText("Please select file with correct formatting.");
         }
-        outputDisplay.setText(text);
     }
 
     {

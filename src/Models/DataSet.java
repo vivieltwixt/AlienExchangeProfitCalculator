@@ -26,8 +26,10 @@ public class DataSet {
         sc.nextLine(); // consume rest of line
 
 
-        if( numDenominations > 7 | numDenominations < 2 | numPrices < 2 | numPrices > 7){
-            throw new IllegalArgumentException ("Invalid parameter for number of denominations and/or number of prices."){};
+        if( numDenominations > 7 | numDenominations < 2 | numPrices < 2 | numPrices > 10){
+            throw new IllegalArgumentException ("Invalid parameter for number of denominations and/or number of prices.\n" );
+              //      " numDenominations should be greater than 1 and less than 8\n" +
+              //      " numPrices should be greater than 1 and less than 11\n"){};
         };
 
 
@@ -45,7 +47,7 @@ public class DataSet {
             calculatePriceInSmallestDenomination();
         }
 
-        return highestPrice - lowestPrice;
+        return (highestPrice - lowestPrice);
     }
 
     private void calculateExchangeRates() {
@@ -62,19 +64,6 @@ public class DataSet {
             // Ex. [15,5,1] means 15 notes of the smallest denomination equals one note of the denomination at index 0,
             // 5 notes of the smallest denomination equals one note of the denomination at index 1.
         }
-
- /*       //TODO: DEBUG
-        for(int i=0; i< ratesAsInts.length; i++) {
-            System.out.println(ratesAsInts[i]);
-        }
-
-       // System.out.println("numDenominations: " + numDenominations);
-        System.out.println("numPrices: " + numPrices);
-
-        for(int i=0; i<exchangeRates.length; i++){
-            System.out.print(exchangeRates[i] + " ");
-        }
-        System.out.println(); */
     }
 
     private void calculatePriceInSmallestDenomination() {
@@ -85,8 +74,6 @@ public class DataSet {
 
         int totalCost = 0;
 
-       /* System.out.println("Length of price " + price.length);
-        System.out.println("Length of exchange rates " + exchangeRates.length); */
 
         for (int j = 0; j < price.length; j++) {
             totalCost += price[j] * exchangeRates[j];
@@ -94,7 +81,7 @@ public class DataSet {
 
         if (totalCost < lowestPrice)
             lowestPrice = totalCost;
-        else if (totalCost > highestPrice)
+        if (totalCost > highestPrice)
             highestPrice = totalCost;
     }
 

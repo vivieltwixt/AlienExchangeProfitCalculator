@@ -34,18 +34,8 @@ public class AlienExchangeProfitModelTest {
             "3 0 0\n" +
             "1 10 0";
 
-    private static String testStringMedium = "2\n" + //TODO
-            "2 2\n" +
-            "2\n" +
-            "2 0\n" +
-            "0 5\n" +
-            "3 3\n" +
-            "3 5\n" +
-            "1 1 1\n" +
-            "3 0 0\n" +
-            "1 10 0";
 
-    private static String testStringLarge = "2\n" + //TODO
+    private static String testStringLarge = "4\n" +
             "2 2\n" +
             "2\n" +
             "2 0\n" +
@@ -54,7 +44,18 @@ public class AlienExchangeProfitModelTest {
             "3 5\n" +
             "1 1 1\n" +
             "3 0 0\n" +
-            "1 10 0";
+            "1 10 0\n" +
+            "3 4\n" +
+            "12 1\n" +
+            "1 2 3\n" +
+            "4 5 6\n" +
+            "7 8 9\n" +
+            "10 11 12\n" +
+            "7 2\n" +
+            "3 1 4 1 5 9\n" +
+            "13 15 1 6 72 4\n" +
+            "2 4 6 8 3 6";
+
 
     private static String testStringBadFormat = "2\n" +
             "2 2\n" +
@@ -77,8 +78,7 @@ public class AlienExchangeProfitModelTest {
         return Arrays.asList(new Object[][]{
                 {"", null},
                 {testStringSmall, new int[]{1,44}},
-                {testStringMedium, new int[]{1,44}}, //TODO
-                {testStringLarge, new int[]{1,44}}, //TODO
+                {testStringLarge, new int[]{1,44,126,10017}},
                 {testStringBadFormat, null}
         });
     }
