@@ -2,12 +2,17 @@ package Models;
 
 import java.util.Scanner;
 
+/*
+*  Represents an input data set
+* */
 public class DataSet {
     private Scanner dataSetScanner;
 
-    private int[] exchangeRates;
+    private int[] exchangeRates; // stores the exchange rate for each denomination in terms of the smallest denomination
+    // Ex. [4,1] means 1 note of the denomination at the zero index is equivalent to 4 notes of the smallest denomination
+    // and 1 note of the denomination at the 1 index is equivalent 1 note of the smallest denomination
+
     private int numPrices;
-    private int numDenominations;
 
     private int lowestPrice;
     private int highestPrice;
@@ -16,9 +21,15 @@ public class DataSet {
     DataSet(Scanner sc) {
         dataSetScanner = sc;
 
-        numDenominations = sc.nextInt();
+        int numDenominations = sc.nextInt();
         numPrices = sc.nextInt();
         sc.nextLine(); // consume rest of line
+
+
+        if( numDenominations > 7 | numDenominations < 2 | numPrices < 2 | numPrices > 7){
+            throw new IllegalArgumentException ("Invalid parameter for number of denominations and/or number of prices."){};
+        };
+
 
         exchangeRates = new int[numDenominations];
 
@@ -26,6 +37,7 @@ public class DataSet {
         highestPrice = Integer.MIN_VALUE;
     }
 
+    /* Calculates the best possible profit for this data set*/
     public int determineBestProfitMargin() {
         calculateExchangeRates();
 
@@ -44,10 +56,14 @@ public class DataSet {
         int[] ratesAsInts = stringArrayToIntArray(ratesAsStrings);
 
         for (int i = 0; i < ratesAsInts.length; i++) {
-            exchangeRates[i] = productOfArrayValues(i, ratesAsInts);
+            exchangeRates[i] = productOfArrayValues(i, ratesAsInts); // Forms an array of exchange rates similar to
+            // ratesAsInts (the list given by the output). However instead of listing exchange rates relative to the
+            // next smallest denomination, exchangeRates list all rates in terms of their value in the smallest denomination.
+            // Ex. [15,5,1] means 15 notes of the smallest denomination equals one note of the denomination at index 0,
+            // 5 notes of the smallest denomination equals one note of the denomination at index 1.
         }
 
-        //TODO: DEBUG
+ /*       //TODO: DEBUG
         for(int i=0; i< ratesAsInts.length; i++) {
             System.out.println(ratesAsInts[i]);
         }
@@ -58,7 +74,7 @@ public class DataSet {
         for(int i=0; i<exchangeRates.length; i++){
             System.out.print(exchangeRates[i] + " ");
         }
-        System.out.println();
+        System.out.println(); */
     }
 
     private void calculatePriceInSmallestDenomination() {
@@ -69,8 +85,8 @@ public class DataSet {
 
         int totalCost = 0;
 
-        System.out.println("Length of price " + price.length);
-        System.out.println("Length of exchange rates " + exchangeRates.length);
+       /* System.out.println("Length of price " + price.length);
+        System.out.println("Length of exchange rates " + exchangeRates.length); */
 
         for (int j = 0; j < price.length; j++) {
             totalCost += price[j] * exchangeRates[j];

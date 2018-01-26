@@ -22,7 +22,6 @@ public class AlienExchangeProfitModelTest {
     private AlienExchangeProfitModel model = new AlienExchangeProfitModel();
     private String inputFileAsString;
     private int[] expectedProfits;
-    private int expectedNumDataSets;
 
     private static String testStringSmall = "2\n" +
             "2 2\n" +
@@ -68,21 +67,19 @@ public class AlienExchangeProfitModelTest {
             "3 0 0\n" +
             "1 10 0";
 
-    public AlienExchangeProfitModelTest(String inputFileAsString, int[] expectedProfits, int expectedNumDataSets) {
+    public AlienExchangeProfitModelTest(String inputFileAsString, int[] expectedProfits) {
         this.inputFileAsString = inputFileAsString;
         this.expectedProfits = expectedProfits;
-        this.expectedNumDataSets = expectedNumDataSets;
     }
 
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-              //  {null, null, 0},
-                {"", null, 0},
-                {testStringSmall, new int[]{1,44}, 2},
-                {testStringMedium, new int[]{1,44}, 2}, //TODO
-                {testStringLarge, new int[]{1,44}, 2}, //TODO
-                {testStringBadFormat, null, 0}
+                {"", null},
+                {testStringSmall, new int[]{1,44}},
+                {testStringMedium, new int[]{1,44}}, //TODO
+                {testStringLarge, new int[]{1,44}}, //TODO
+                {testStringBadFormat, null}
         });
     }
 
@@ -96,7 +93,7 @@ public class AlienExchangeProfitModelTest {
     }
 
     @Test
-    /* Checks that updateModelTest function obtains the correct profit list and num of data set values*/
+    /* Checks that updateModelTest function obtains the correct profit list*/
     public void updateModelTest() throws IOException {
         File tmpFile = File.createTempFile("testInput", ".tmp");
         tmpFile.deleteOnExit();
@@ -107,7 +104,6 @@ public class AlienExchangeProfitModelTest {
 
         model.updateModel(tmpFile);
 
-        Assert.assertEquals(expectedNumDataSets, model.getNumDataSets());
         Assert.assertArrayEquals(expectedProfits, model.getProfits());
     }
 
