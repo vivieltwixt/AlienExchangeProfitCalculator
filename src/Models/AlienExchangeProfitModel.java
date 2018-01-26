@@ -28,20 +28,29 @@ public class AlienExchangeProfitModel {
         try {
             sc = new Scanner(inputFile);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            return; //TODO: alert for file not found
         }
 
-        numDataSets = sc.nextInt();
+        try {
+            numDataSets = sc.nextInt();
 
-        profits = new int[numDataSets];
-        for (int i = 0; i < numDataSets; i++) {
-            System.out.println("Working on data set: " + i);
-            DataSet itemData = new DataSet(sc);
-            profits[i] = itemData.determineBestProfitMargin();
+            profits = new int[numDataSets];
+            for (int i = 0; i < numDataSets; i++) {
+                DataSet itemData = new DataSet(sc);
+                profits[i] = itemData.determineBestProfitMargin();
+            }
+        } catch (java.util.NoSuchElementException e) {
+            resetModel();
+            //TODO: alert for incorrect format
+            return;
         }
     }
 
     public int[] getProfits() {
         return profits;
+    }
+
+    public int getNumDataSets() {
+        return numDataSets;
     }
 }
